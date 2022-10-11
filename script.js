@@ -11,16 +11,31 @@ const holdBtn = document.querySelector('.btn--hold');
 const newBtn = document.querySelector('.btn--new');
 const currentZero = document.getElementById('current--0')
 const currentOne = document.getElementById('current--1')
-score0.textContent = 0;
-score1.textContent = 0;
-diceEle.classList.add("hidden");
 
 //starting conditons
-const score = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
+let score, currentScore, activePlayer, playing;
 
+const initialize = function() {
+  score0.textContent = 0;
+  score1.textContent = 0;
+  diceEle.classList.add("hidden");
+  score = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+  score0.textContent = 0;
+  score1.textContent = 0;
+  currentZero.textContent = 0;
+  currentOne.textContent = 0;
+  playerZero.classList.remove('player--winner');
+  playerOne.classList.remove('player--winner');
+  playerOne.classList.remove('player--active');
+  playerZero.classList.add('player--active');
+}
+
+initialize();
+
+//switching player function
 const switchPlayer = function() {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
   currentScore = 0
@@ -46,16 +61,18 @@ rollBtn.addEventListener('click', () => {
 });
 
 holdBtn.addEventListener("click", function() {
-  playing = false;
-  score[activePlayer] += currentScore
-  document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer];
-  //add current score to active player score
-  //check if player score is >= 100
-  if (score[activePlayer] >= 50){
-    //player has won
-    document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
-    document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
-  } else {
-    switchPlayer();
+  if(playing){
+    score[activePlayer] += currentScore
+    document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer];
+    if (score[activePlayer] >= 50){
+      playing = false;
+      diceEle.classList.add("hidden");
+      document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+      document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+    } else {
+      switchPlayer();
+    }
   }
 });
+
+newBtn.addEventListener('click', initialize);
