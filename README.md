@@ -8,6 +8,7 @@
 -If the player rolls a one, their current score will reset to 0 and the next player will get a chance to roll.
 <br>
 -The game ends when one person reaches a total score of 50. 
+<br>
 
 ![DiceGameIntro](https://user-images.githubusercontent.com/106459977/195223929-b8b9a988-af0b-41a0-ab64-626ddec68e16.PNG)
 ![DiceGamePlaying](https://user-images.githubusercontent.com/106459977/195223938-3e2e1d68-2aad-4aac-b41d-db8b09a3c0e9.PNG)
